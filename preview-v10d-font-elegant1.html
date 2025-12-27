@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | V10D - Elegant Didone</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-paper: #f4f3f0;
+      --color-ink: #1a2744;
+      --color-red: #c94c4c;
+      --color-gray: #8a8d8f;
+      --color-gray-light: #a8abac;
+      --color-divider: #d8d6d0;
+
+      /* V10D: Bodoni Moda + Raleway - 高对比Didone风格 */
+      --font-display: 'Bodoni Moda', 'Didot', Georgia, serif;
+      --font-body: 'Raleway', -apple-system, sans-serif;
+
+      --transition-slow: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards 0.8s;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    .nav { display: flex; gap: 2rem; }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link:hover { color: var(--color-ink); }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-paper);
+      background-color: var(--color-ink);
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: background var(--transition-fast);
+    }
+
+    .nav-cta:hover { background-color: var(--color-red); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 400;
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--color-ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name span {
+      display: block;
+      opacity: 0;
+    }
+
+    .hero-name span:first-child {
+      animation: fadeIn var(--transition-slow) forwards 0.4s;
+    }
+
+    .hero-name span:last-child {
+      font-style: italic;
+      animation: fadeIn var(--transition-slow) forwards 0.6s;
+    }
+
+    .hero-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-red), transparent);
+      margin: 2rem auto;
+      animation: expandDivider 1.5s ease forwards 1s;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards 1.4s;
+    }
+
+    .hero-tagline-accent { color: var(--color-red); }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards 1.6s;
+    }
+
+    .hero-stat {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gray-light);
+    }
+
+    .hero-stat-divider { color: var(--color-divider); }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      text-decoration: none;
+      padding: 1rem 0;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards 1.8s;
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--color-ink);
+      transition: all var(--transition-fast);
+    }
+
+    .hero-cta:hover { color: var(--color-red); }
+    .hero-cta:hover::before { background-color: var(--color-red); }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards 2.2s, float 2s ease-in-out infinite 2.2s;
+    }
+
+    .scroll-indicator-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--color-red), transparent);
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes expandDivider { to { width: min(200px, 50%); } }
+    @keyframes float {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .hero-stats { flex-direction: column; gap: 0.5rem; }
+      .hero-stat-divider { display: none; }
+    }
+
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-ink);
+      color: var(--color-paper);
+      padding: 1rem;
+      max-width: 280px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      z-index: 1001;
+      border-left: 3px solid var(--color-red);
+    }
+
+    .design-notes h4 {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-red);
+    }
+
+    .design-notes ul { margin: 0; padding-left: 1rem; }
+    .design-notes li { margin-bottom: 0.25rem; }
+
+    .close-notes {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--color-gray);
+      cursor: pointer;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--color-red);
+      color: var(--color-paper);
+      padding: 2px 8px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .font-preview {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-style: italic;
+      color: var(--color-paper);
+      margin-top: 0.75rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="grain-overlay"></div>
+
+  <header class="header">
+    <a href="#" class="logo">Daniel Xing</a>
+    <nav class="nav">
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#" class="nav-link">Work</a>
+      <a href="#" class="nav-cta">Let's Talk</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-name">
+      <span>Daniel</span>
+      <span>Xing</span>
+    </h1>
+
+    <div class="hero-divider"></div>
+
+    <p class="hero-tagline">
+      <span class="hero-tagline-accent">AI-Driven</span> China Marketing Expert
+    </p>
+
+    <div class="hero-stats">
+      <span class="hero-stat">20+ Years</span>
+      <span class="hero-stat-divider">/</span>
+      <span class="hero-stat">150+ Projects</span>
+      <span class="hero-stat-divider">/</span>
+      <span class="hero-stat">$10M+ Value</span>
+    </div>
+
+    <a href="#" class="hero-cta">
+      Explore Work
+      <span>&rarr;</span>
+    </a>
+
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-line"></div>
+    </div>
+  </section>
+
+  <div class="design-notes">
+    <button class="close-notes" onclick="this.parentElement.style.display='none'">&times;</button>
+    <span class="version-badge">V10D</span>
+    <h4>Bodoni Moda</h4>
+    <ul>
+      <li><strong>标题:</strong> Bodoni Moda</li>
+      <li><strong>正文:</strong> Raleway</li>
+      <li>高对比 Didone 风格</li>
+      <li>极细横线 + 粗竖线</li>
+      <li>时尚杂志经典字体</li>
+      <li>斜体更显优雅</li>
+    </ul>
+    <div class="font-preview">Elegant</div>
+  </div>
+</body>
+</html>

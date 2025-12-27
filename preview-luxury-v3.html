@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | Luxury Minimal V3 - Editorial Magazine</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       CSS Variables - Luxury Minimal Palette
+       ======================================== */
+    :root {
+      /* Colors */
+      --color-cream: #f5f3ef;
+      --color-cream-dark: #ebe8e2;
+      --color-charcoal: #1c1c1c;
+      --color-charcoal-light: #2a2a2a;
+      --color-gold: #b8860b;
+      --color-gold-light: #d4a84b;
+      --color-gold-dark: #8b6508;
+      --color-gray: #6b6b6b;
+      --color-gray-light: #9a9a9a;
+      --color-divider: #d4d0c8;
+
+      /* Typography */
+      --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Transitions */
+      --transition-slow: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-medium: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-cream);
+      color: var(--color-charcoal);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ========================================
+       Grain Texture Overlay
+       ======================================== */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* ========================================
+       Header / Navigation
+       ======================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--space-md) var(--space-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 0.5s;
+    }
+
+    .logo {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .logo:hover {
+      color: var(--color-charcoal);
+    }
+
+    .nav {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      text-decoration: none;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-charcoal);
+    }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-charcoal);
+      border: 1px solid var(--color-charcoal);
+      padding: 0.625rem 1.25rem;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      background-color: var(--color-charcoal);
+      color: var(--color-cream);
+    }
+
+    /* ========================================
+       Hero Section - Editorial Magazine Style
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr 80px;
+      grid-template-rows: 1fr auto 1fr;
+      padding: var(--space-3xl) 0;
+      position: relative;
+    }
+
+    /* Side Decorations */
+    .hero-side-left {
+      grid-column: 1;
+      grid-row: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid var(--color-divider);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.8s;
+    }
+
+    .hero-year {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-gray-light);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .hero-side-right {
+      grid-column: 4;
+      grid-row: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-left: 1px solid var(--color-divider);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.8s;
+    }
+
+    .hero-scroll-text {
+      font-family: var(--font-body);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray-light);
+      writing-mode: vertical-rl;
+    }
+
+    /* Main Name Area */
+    .hero-name-area {
+      grid-column: 2 / 4;
+      grid-row: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-number {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 25vw, 16rem);
+      font-weight: 300;
+      line-height: 0.8;
+      color: var(--color-divider);
+      opacity: 0.3;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      opacity: 0;
+      animation: fadeIn 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 18vw, 12rem);
+      font-weight: 300;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      color: var(--color-charcoal);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-name-first {
+      display: block;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: revealUp var(--transition-slow) forwards;
+      animation-delay: 0.6s;
+    }
+
+    .hero-name-last {
+      display: block;
+      font-style: italic;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: revealUp var(--transition-slow) forwards;
+      animation-delay: 0.8s;
+    }
+
+    /* Center Divider with Text */
+    .hero-divider-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin: var(--space-xl) 0;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.2s;
+    }
+
+    .hero-divider-line {
+      width: 60px;
+      height: 1px;
+      background-color: var(--color-gold);
+    }
+
+    .hero-divider-text {
+      font-family: var(--font-body);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+
+    /* Tagline */
+    .hero-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--color-gray);
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto var(--space-xl);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.4s;
+    }
+
+    /* Stats Row */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-2xl);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.6s;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--color-charcoal);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-family: var(--font-body);
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gray-light);
+      margin-top: var(--space-xs);
+    }
+
+    /* CTA */
+    .hero-cta-wrap {
+      position: absolute;
+      bottom: var(--space-3xl);
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 2s;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-charcoal);
+      text-decoration: none;
+      padding: 0.875rem 0;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--color-charcoal);
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: transform var(--transition-fast);
+    }
+
+    .hero-cta:hover {
+      color: var(--color-gold);
+    }
+
+    .hero-cta:hover::after {
+      background-color: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+
+    .hero-cta-arrow {
+      font-size: 1rem;
+      transition: transform var(--transition-fast);
+    }
+
+    .hero-cta:hover .hero-cta-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ========================================
+       Services Section - Magazine Grid
+       ======================================== */
+    .services {
+      padding: var(--space-3xl) var(--space-xl);
+      background-color: var(--color-charcoal);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: var(--space-2xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid var(--color-charcoal-light);
+    }
+
+    .services-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      color: var(--color-cream);
+    }
+
+    .services-count {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background-color: var(--color-charcoal-light);
+    }
+
+    .service-card {
+      background-color: var(--color-charcoal);
+      padding: var(--space-xl);
+      transition: all var(--transition-medium);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-gold);
+      transition: width var(--transition-fast);
+    }
+
+    .service-card:hover::before {
+      width: 100%;
+    }
+
+    .service-card:hover {
+      background-color: var(--color-charcoal-light);
+    }
+
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--color-gold);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: var(--space-lg);
+    }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 400;
+      color: var(--color-cream);
+      margin-bottom: var(--space-sm);
+      line-height: 1.2;
+    }
+
+    .service-desc {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--color-gray);
+    }
+
+    /* ========================================
+       Footer Preview
+       ======================================== */
+    .footer {
+      padding: var(--space-2xl) var(--space-xl);
+      background-color: var(--color-cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--color-charcoal);
+    }
+
+    .footer-text {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--color-gray);
+    }
+
+    /* ========================================
+       Animations
+       ======================================== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       Responsive Design
+       ======================================== */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 40px 1fr 40px;
+        grid-template-rows: 1fr;
+      }
+
+      .hero-name-area {
+        grid-column: 2;
+      }
+
+      .hero-side-left,
+      .hero-side-right {
+        display: none;
+      }
+
+      .hero-stats {
+        gap: var(--space-lg);
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: var(--space-3xl) var(--space-md);
+      }
+
+      .hero-number {
+        font-size: 30vw;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+
+      .hero-divider-wrap {
+        flex-direction: column;
+        gap: var(--space-sm);
+      }
+
+      .hero-divider-line {
+        width: 40px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: var(--space-sm);
+        text-align: center;
+      }
+    }
+
+    /* ========================================
+       Design Notes (for preview only)
+       ======================================== */
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-charcoal);
+      color: var(--color-cream);
+      padding: var(--space-md);
+      max-width: 320px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      z-index: 1001;
+      border-left: 3px solid var(--color-gold);
+    }
+
+    .design-notes h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: var(--space-xs);
+      color: var(--color-gold);
+    }
+
+    .design-notes ul {
+      margin: 0;
+      padding-left: var(--space-md);
+    }
+
+    .design-notes li {
+      margin-bottom: 4px;
+    }
+
+    .close-notes {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--color-gray);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--color-gold);
+      color: var(--color-charcoal);
+      padding: 2px 8px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+    }
+  </style>
+</head>
+<body>
+  <!-- Grain Texture Overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">Daniel Xing Studio</a>
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Left Side -->
+    <aside class="hero-side-left">
+      <span class="hero-year">Est. 2005</span>
+    </aside>
+
+    <!-- Main Name Area -->
+    <div class="hero-name-area">
+      <span class="hero-number">DX</span>
+
+      <h1 class="hero-name">
+        <span class="hero-name-first">Daniel</span>
+        <span class="hero-name-last">Xing</span>
+      </h1>
+
+      <div class="hero-divider-wrap">
+        <div class="hero-divider-line"></div>
+        <span class="hero-divider-text">AI-Driven China Marketing</span>
+        <div class="hero-divider-line"></div>
+      </div>
+
+      <p class="hero-tagline">
+        "Helping global brands achieve breakthrough growth in China's digital ecosystem"
+      </p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">20+</div>
+          <div class="hero-stat-label">Years</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">150+</div>
+          <div class="hero-stat-label">Projects</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">$10M+</div>
+          <div class="hero-stat-label">Value</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <aside class="hero-side-right">
+      <span class="hero-scroll-text">Scroll to explore</span>
+    </aside>
+
+    <!-- CTA -->
+    <div class="hero-cta-wrap">
+      <a href="#work" class="hero-cta">
+        View Selected Work
+        <span class="hero-cta-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Services Section Preview -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <h2 class="services-title">Services</h2>
+      <span class="services-count">04 Offerings</span>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <span class="service-number">01</span>
+        <h3 class="service-title">Social Media Management</h3>
+        <p class="service-desc">WeChat, Xiaohongshu, Douyin strategy with AI-powered content optimization.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">02</span>
+        <h3 class="service-title">Market Entry Strategy</h3>
+        <p class="service-desc">Brand localization, regulatory compliance, and competitor analysis.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">03</span>
+        <h3 class="service-title">Marketing Operations</h3>
+        <p class="service-desc">Data-driven campaigns with real-time dashboards and ROI tracking.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">04</span>
+        <h3 class="service-title">E-commerce Solutions</h3>
+        <p class="service-desc">Multi-platform launch across eBay, Amazon, Tmall, and more.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer Preview -->
+  <footer class="footer">
+    <div class="footer-logo">Daniel Xing</div>
+    <p class="footer-text">AI-Driven China Marketing Expert</p>
+  </footer>
+
+  <!-- Design Notes Panel -->
+  <div class="design-notes" id="designNotes">
+    <button class="close-notes" onclick="document.getElementById('designNotes').style.display='none'">&times;</button>
+    <span class="version-badge">VERSION 3</span>
+    <h4>Editorial Magazine</h4>
+    <ul>
+      <li>Giant "DX" watermark background</li>
+      <li>Italic last name for elegance</li>
+      <li>Side columns with year/scroll</li>
+      <li>Centered divider with text</li>
+      <li>Dark services grid layout</li>
+      <li>Minimal, refined typography</li>
+    </ul>
+  </div>
+</body>
+</html>

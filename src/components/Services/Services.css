@@ -1,0 +1,98 @@
+/* V10 Luxury Minimal Services */
+.services {
+  padding: var(--space-24) var(--space-6);
+  background-color: var(--color-bg-primary);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.section-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: var(--space-4);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-ink);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
+.service-card {
+  padding: var(--space-10);
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-divider);
+  transition: all var(--transition-fast);
+}
+
+.service-card:hover {
+  border-color: var(--color-red);
+  transform: translateY(-5px);
+}
+
+.service-number {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-red);
+  opacity: 0.5;
+  margin-bottom: var(--space-4);
+}
+
+.service-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: var(--space-4);
+}
+
+.service-desc {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-gray);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: var(--space-16) var(--space-4);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .service-card {
+    padding: var(--space-8);
+  }
+}

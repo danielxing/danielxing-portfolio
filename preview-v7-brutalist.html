@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | V7 - Brutalist Mono</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Bitter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --gray: #888888;
+      --gray-light: #cccccc;
+      --border: #000000;
+
+      --font-mono: 'IBM Plex Mono', monospace;
+      --font-serif: 'Bitter', Georgia, serif;
+
+      --transition: 0.2s ease;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--black);
+      background: var(--white);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.3s;
+    }
+
+    .logo {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--black);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      border-bottom: 1px solid var(--black);
+    }
+
+    .hero-name {
+      font-family: var(--font-mono);
+      font-size: clamp(3rem, 12vw, 8rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .hero-name span {
+      display: block;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .hero-name span:first-child {
+      animation: slideUp 0.5s ease forwards 0.1s;
+    }
+
+    .hero-name span:last-child {
+      animation: slideUp 0.5s ease forwards 0.2s;
+    }
+
+    .hero-line {
+      width: 60px;
+      height: 1px;
+      background: var(--black);
+      margin: 2rem auto;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.4s;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gray);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.5s;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.6s;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .stat-label {
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .hero-cta {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--black);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border: 1px solid var(--black);
+      transition: all var(--transition);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.7s;
+    }
+
+    .hero-cta:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    /* Services */
+    .services {
+      padding: 4rem 2rem;
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--black);
+      margin-bottom: 2rem;
+    }
+
+    .services-title {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .service-item {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--black);
+      border-bottom: 1px solid var(--black);
+      transition: background var(--transition);
+    }
+
+    .service-item:last-child {
+      border-right: none;
+    }
+
+    .service-item:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .service-number {
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .service-item:hover .service-number {
+      color: var(--gray-light);
+    }
+
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.75rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .service-item:hover .service-desc {
+      color: var(--gray-light);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--black);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav { display: none; }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-item {
+        border-right: none;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Design Notes */
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--black);
+      color: var(--white);
+      padding: 1rem;
+      max-width: 240px;
+      font-size: 0.6875rem;
+      line-height: 1.5;
+      z-index: 1001;
+    }
+
+    .design-notes h4 {
+      font-size: 0.75rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .design-notes ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .design-notes li {
+      margin-bottom: 0.25rem;
+      color: var(--gray-light);
+    }
+
+    .close-notes {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      border: 1px solid var(--white);
+      padding: 2px 6px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="logo">DX</a>
+    <nav class="nav">
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#" class="nav-link">Work</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-name">
+      <span>Daniel</span>
+      <span>Xing</span>
+    </h1>
+
+    <div class="hero-line"></div>
+
+    <p class="hero-tagline">AI-Driven China Marketing</p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-value">20+</div>
+        <div class="stat-label">Years</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">150+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$10M+</div>
+        <div class="stat-label">Value</div>
+      </div>
+    </div>
+
+    <a href="#" class="hero-cta">View Work</a>
+  </section>
+
+  <section class="services">
+    <div class="services-header">
+      <span class="services-title">Services</span>
+      <span class="services-title">04</span>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-item">
+        <span class="service-number">01</span>
+        <h3 class="service-title">Social Media</h3>
+        <p class="service-desc">WeChat, Xiaohongshu, Douyin</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-number">02</span>
+        <h3 class="service-title">Market Entry</h3>
+        <p class="service-desc">Brand localization</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-number">03</span>
+        <h3 class="service-title">Marketing Ops</h3>
+        <p class="service-desc">Data-driven campaigns</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-number">04</span>
+        <h3 class="service-title">E-commerce</h3>
+        <p class="service-desc">Multi-platform launch</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Daniel Xing</span>
+    <span>Shanghai</span>
+    <span>2025</span>
+  </footer>
+
+  <div class="design-notes" id="designNotes">
+    <button class="close-notes" onclick="this.parentElement.style.display='none'">&times;</button>
+    <span class="version-badge">V7</span>
+    <h4>Brutalist Mono</h4>
+    <ul>
+      <li>IBM Plex Mono font</li>
+      <li>Pure black & white</li>
+      <li>No color accents</li>
+      <li>Hard grid lines</li>
+      <li>Uppercase headers</li>
+      <li>Zero decoration</li>
+    </ul>
+  </div>
+</body>
+</html>

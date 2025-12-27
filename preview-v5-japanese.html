@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | V5 - Japanese Zen</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-ink: #1a1a1a;
+      --color-paper: #faf8f5;
+      --color-stone: #8b8680;
+      --color-mist: #d4d0c8;
+      --color-moss: #6b7c5e;
+
+      --font-serif: 'Shippori Mincho', 'Hiragino Mincho Pro', serif;
+      --font-sans: 'Zen Kaku Gothic New', sans-serif;
+
+      --transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-paper);
+      color: var(--color-ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========================================
+       Washi Paper Texture
+       ======================================== */
+    .texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.015;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ========================================
+       Header
+       ======================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 0.8s;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--color-ink);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--color-stone);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--color-ink);
+    }
+
+    /* ========================================
+       Hero - Zen Composition
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 4rem;
+    }
+
+    /* Vertical Text Decoration */
+    .vertical-text {
+      position: absolute;
+      font-family: var(--font-serif);
+      font-size: 0.625rem;
+      letter-spacing: 0.3em;
+      color: var(--color-mist);
+      writing-mode: vertical-rl;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 1.6s;
+    }
+
+    .vertical-text-left {
+      left: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .vertical-text-right {
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* Center Content */
+    .hero-content {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    /* Enso Circle */
+    .enso {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 3rem;
+      position: relative;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 0.3s;
+    }
+
+    .enso-circle {
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--color-mist);
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .enso-circle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: var(--color-moss);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--color-ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 0.5s;
+    }
+
+    .hero-line {
+      width: 1px;
+      height: 0;
+      background: var(--color-moss);
+      margin: 0 auto 1.5rem;
+      animation: growDown 0.8s ease forwards 1s;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--color-stone);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 1.2s;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 1.4s;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--color-ink);
+    }
+
+    .stat-label {
+      font-family: var(--font-sans);
+      font-size: 0.625rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--color-stone);
+      margin-top: 0.25rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--color-ink);
+      text-decoration: none;
+      padding: 0.875rem 2rem;
+      border: 1px solid var(--color-mist);
+      transition: all var(--transition);
+      opacity: 0;
+      animation: softFade 1.2s ease forwards 1.6s;
+    }
+
+    .hero-cta:hover {
+      background: var(--color-ink);
+      color: var(--color-paper);
+      border-color: var(--color-ink);
+    }
+
+    /* ========================================
+       Services - Horizontal Scroll Feel
+       ======================================== */
+    .services {
+      padding: 6rem 3rem;
+      border-top: 1px solid var(--color-mist);
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .services-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-ink);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--color-mist);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--color-paper);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background var(--transition);
+    }
+
+    .service-card:hover {
+      background: #f5f2ed;
+    }
+
+    .service-icon {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--color-moss);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-desc {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 300;
+      color: var(--color-stone);
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       Footer
+       ======================================== */
+    .footer {
+      padding: 3rem;
+      text-align: center;
+      border-top: 1px solid var(--color-mist);
+    }
+
+    .footer-text {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--color-stone);
+    }
+
+    /* ========================================
+       Animations
+       ======================================== */
+    @keyframes softFade {
+      to { opacity: 1; }
+    }
+
+    @keyframes growDown {
+      to { height: 40px; }
+    }
+
+    /* ========================================
+       Responsive
+       ======================================== */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .vertical-text {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+
+      .hero { padding: 2rem; }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+        padding: 4rem 2rem;
+      }
+    }
+
+    /* ========================================
+       Design Notes
+       ======================================== */
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-ink);
+      color: var(--color-paper);
+      padding: 1.25rem;
+      max-width: 260px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      z-index: 1001;
+    }
+
+    .design-notes h4 {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-moss);
+    }
+
+    .design-notes ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .design-notes li {
+      margin-bottom: 0.25rem;
+    }
+
+    .close-notes {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: none;
+      border: none;
+      color: var(--color-stone);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--color-moss);
+      color: white;
+      padding: 2px 6px;
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="texture"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">邢</a>
+    <nav class="nav">
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#" class="nav-link">Work</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="vertical-text vertical-text-left">AI · CHINA · MARKETING</span>
+    <span class="vertical-text vertical-text-right">EST. 2005 · SHANGHAI</span>
+
+    <div class="hero-content">
+      <div class="enso">
+        <div class="enso-circle"></div>
+      </div>
+
+      <h1 class="hero-name">Daniel Xing</h1>
+
+      <div class="hero-line"></div>
+
+      <p class="hero-tagline">AI-DRIVEN CHINA MARKETING</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">20+</div>
+          <div class="stat-label">YEARS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">150+</div>
+          <div class="stat-label">PROJECTS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">$10M+</div>
+          <div class="stat-label">VALUE</div>
+        </div>
+      </div>
+
+      <a href="#" class="hero-cta">VIEW WORK</a>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="services-header">
+      <h2 class="services-title">Services</h2>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-icon">壱</div>
+        <h3 class="service-title">Social Media</h3>
+        <p class="service-desc">WeChat, Xiaohongshu, Douyin strategy</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">弐</div>
+        <h3 class="service-title">Market Entry</h3>
+        <p class="service-desc">Brand localization for China</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">参</div>
+        <h3 class="service-title">Marketing Ops</h3>
+        <p class="service-desc">Data-driven campaigns</p>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">肆</div>
+        <h3 class="service-title">E-commerce</h3>
+        <p class="service-desc">Multi-platform optimization</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">DANIEL XING — SHANGHAI</p>
+  </footer>
+
+  <!-- Design Notes -->
+  <div class="design-notes" id="designNotes">
+    <button class="close-notes" onclick="this.parentElement.style.display='none'">&times;</button>
+    <span class="version-badge">V5</span>
+    <h4>Japanese Zen</h4>
+    <ul>
+      <li>Shippori Mincho font</li>
+      <li>Washi paper texture</li>
+      <li>Enso circle motif</li>
+      <li>Moss green accent</li>
+      <li>Vertical text elements</li>
+      <li>Slow, meditative animations</li>
+    </ul>
+  </div>
+</body>
+</html>

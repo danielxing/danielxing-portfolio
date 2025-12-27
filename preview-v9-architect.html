@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | V9 - Architect Grid</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --paper: #f4f3f0;
+      --ink: #1a2744;
+      --ink-light: #3d4f6f;
+      --red: #c94c4c;
+      --gray: #8a8d8f;
+      --grid: #d8d6d0;
+
+      --font-mono: 'Space Mono', monospace;
+      --font-serif: 'Libre Baskerville', Georgia, serif;
+
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: var(--font-mono);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Grid Background */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--paper);
+      border-bottom: 1px solid var(--ink);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 0.3s;
+    }
+
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      color: var(--red);
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--ink);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Left - Blueprint Style */
+    .hero-blueprint {
+      position: relative;
+      padding: 2rem;
+      border: 1px solid var(--ink);
+    }
+
+    .blueprint-corner {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border: 1px solid var(--red);
+    }
+
+    .blueprint-corner-tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+    .blueprint-corner-tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
+    .blueprint-corner-bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
+    .blueprint-corner-br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+    .blueprint-label {
+      position: absolute;
+      top: -0.5rem;
+      left: 1.5rem;
+      background: var(--paper);
+      padding: 0 0.5rem;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name span {
+      display: block;
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    .hero-name span:first-child {
+      animation: slideUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero-name span:last-child {
+      font-style: italic;
+      animation: slideUp 0.6s ease forwards 0.35s;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      color: var(--ink-light);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 0.6s;
+    }
+
+    .hero-tagline .highlight {
+      color: var(--red);
+    }
+
+    /* Right - Specs */
+    .hero-specs {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spec-group {
+      padding: 1.5rem 0;
+      border-bottom: 1px dashed var(--grid);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .spec-group:nth-child(1) { animation-delay: 0.5s; }
+    .spec-group:nth-child(2) { animation-delay: 0.6s; }
+    .spec-group:nth-child(3) { animation-delay: 0.7s; }
+
+    .spec-group:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-value {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .spec-value .unit {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--red);
+      margin-left: 0.25rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards 0.9s;
+      transition: color var(--transition);
+    }
+
+    .hero-cta:hover {
+      color: var(--red);
+    }
+
+    .hero-cta-line {
+      width: 30px;
+      height: 1px;
+      background: var(--ink);
+      transition: all var(--transition);
+    }
+
+    .hero-cta:hover .hero-cta-line {
+      width: 50px;
+      background: var(--red);
+    }
+
+    /* Services */
+    .services {
+      padding: 4rem 2.5rem;
+      background: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--ink-light);
+    }
+
+    .services-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--paper);
+    }
+
+    .services-ref {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--ink-light);
+    }
+
+    .service-item {
+      background: var(--ink);
+      padding: 1.5rem;
+      transition: background var(--transition);
+    }
+
+    .service-item:hover {
+      background: var(--ink-light);
+    }
+
+    .service-ref {
+      font-size: 0.5rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.6875rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-top: 1px solid var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+
+      .hero { padding: 6rem 1.5rem 3rem; }
+
+      .services { padding: 3rem 1.5rem; }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+
+    /* Design Notes */
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1rem;
+      max-width: 240px;
+      font-size: 0.6875rem;
+      line-height: 1.5;
+      z-index: 1001;
+      border: 1px solid var(--ink-light);
+    }
+
+    .design-notes h4 {
+      font-family: var(--font-serif);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+      color: var(--paper);
+    }
+
+    .design-notes ul {
+      margin: 0;
+      padding-left: 1rem;
+    }
+
+    .design-notes li {
+      margin-bottom: 0.25rem;
+      color: var(--gray);
+    }
+
+    .close-notes {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--paper);
+      padding: 2px 6px;
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+
+  <header class="header">
+    <a href="#" class="logo">Daniel<span class="logo-mark">.</span>Xing</a>
+    <nav class="nav">
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Services</a>
+      <a href="#" class="nav-link">Work</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-blueprint">
+        <div class="blueprint-corner blueprint-corner-tl"></div>
+        <div class="blueprint-corner blueprint-corner-tr"></div>
+        <div class="blueprint-corner blueprint-corner-bl"></div>
+        <div class="blueprint-corner blueprint-corner-br"></div>
+        <span class="blueprint-label">Profile</span>
+
+        <h1 class="hero-name">
+          <span>Daniel</span>
+          <span>Xing</span>
+        </h1>
+
+        <p class="hero-tagline">
+          <span class="highlight">[AI]</span> China Marketing Expert
+        </p>
+      </div>
+
+      <div class="hero-specs">
+        <div class="spec-group">
+          <div class="spec-label">Experience</div>
+          <div class="spec-value">20<span class="unit">+ yrs</span></div>
+        </div>
+
+        <div class="spec-group">
+          <div class="spec-label">Projects</div>
+          <div class="spec-value">150<span class="unit">+</span></div>
+        </div>
+
+        <div class="spec-group">
+          <div class="spec-label">Value Delivered</div>
+          <div class="spec-value">$10M<span class="unit">+</span></div>
+        </div>
+
+        <a href="#" class="hero-cta">
+          <span class="hero-cta-line"></span>
+          View Work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="services-header">
+      <h2 class="services-title">Services</h2>
+      <span class="services-ref">REF: SVC-001</span>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-item">
+        <span class="service-ref">01.</span>
+        <h3 class="service-title">Social Media</h3>
+        <p class="service-desc">WeChat, Xiaohongshu, Douyin</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-ref">02.</span>
+        <h3 class="service-title">Market Entry</h3>
+        <p class="service-desc">Brand localization</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-ref">03.</span>
+        <h3 class="service-title">Marketing Ops</h3>
+        <p class="service-desc">Data-driven campaigns</p>
+      </article>
+
+      <article class="service-item">
+        <span class="service-ref">04.</span>
+        <h3 class="service-title">E-commerce</h3>
+        <p class="service-desc">Multi-platform launch</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Daniel Xing</span>
+    <span>Shanghai, CN</span>
+    <span>Rev. 2025</span>
+  </footer>
+
+  <div class="design-notes" id="designNotes">
+    <button class="close-notes" onclick="this.parentElement.style.display='none'">&times;</button>
+    <span class="version-badge">V9</span>
+    <h4>Architect Grid</h4>
+    <ul>
+      <li>Space Mono + Libre Baskerville</li>
+      <li>Blueprint-style frame</li>
+      <li>Grid paper background</li>
+      <li>Navy ink + red annotations</li>
+      <li>Technical reference codes</li>
+      <li>Precision layout</li>
+    </ul>
+  </div>
+</body>
+</html>

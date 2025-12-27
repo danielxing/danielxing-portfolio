@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daniel Xing | V10 - Luxury + Architect Colors</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       CSS Variables - Architect Color Palette
+       ======================================== */
+    :root {
+      /* Colors - From V9 Architect */
+      --color-paper: #f4f3f0;
+      --color-paper-dark: #e8e6e1;
+      --color-ink: #1a2744;
+      --color-ink-light: #3d4f6f;
+      --color-red: #c94c4c;
+      --color-gray: #8a8d8f;
+      --color-gray-light: #a8abac;
+      --color-divider: #d8d6d0;
+
+      /* Typography - From V1 Luxury */
+      --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Transitions */
+      --transition-slow: 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-medium: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-fast: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ========================================
+       Reset & Base
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ========================================
+       Grain Texture Overlay
+       ======================================== */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* ========================================
+       Header / Navigation
+       ======================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--space-md) var(--space-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 0.8s;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .logo:hover {
+      color: var(--color-red);
+    }
+
+    .nav {
+      display: flex;
+      gap: var(--space-lg);
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      text-decoration: none;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--color-red);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--color-ink);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-paper);
+      background-color: var(--color-ink);
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      background-color: var(--color-red);
+    }
+
+    /* ========================================
+       Hero Section
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp var(--transition-slow) forwards;
+      animation-delay: 0.2s;
+    }
+
+    /* Name - Large Display Typography */
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero-name-first {
+      display: block;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 0.4s;
+    }
+
+    .hero-name-last {
+      display: block;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 0.6s;
+    }
+
+    /* Animated Divider */
+    .hero-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-red), transparent);
+      margin: var(--space-lg) auto;
+      animation: expandDivider 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation-delay: 1s;
+    }
+
+    /* Tagline */
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(0.875rem, 2vw, 1.125rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gray);
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.4s;
+    }
+
+    .hero-tagline-accent {
+      color: var(--color-red);
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.6s;
+    }
+
+    .hero-stat {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gray-light);
+    }
+
+    .hero-stat-divider {
+      color: var(--color-divider);
+    }
+
+    /* CTA Button */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-ink);
+      text-decoration: none;
+      padding: 1rem 0;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards;
+      animation-delay: 1.8s;
+      transition: color var(--transition-fast);
+    }
+
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--color-ink);
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: transform var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .hero-cta:hover {
+      color: var(--color-red);
+    }
+
+    .hero-cta:hover::before {
+      background-color: var(--color-red);
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+
+    .hero-cta-arrow {
+      transition: transform var(--transition-fast);
+    }
+
+    .hero-cta:hover .hero-cta-arrow {
+      transform: translateX(5px);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: var(--space-xl);
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: fadeIn var(--transition-slow) forwards, float 2s ease-in-out infinite;
+      animation-delay: 2.2s, 2.2s;
+    }
+
+    .scroll-indicator-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(180deg, var(--color-red), transparent);
+    }
+
+    /* ========================================
+       About Section Preview
+       ======================================== */
+    .about {
+      padding: var(--space-3xl) var(--space-lg);
+      background-color: var(--color-paper-dark);
+    }
+
+    .about-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .about-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-red);
+      margin-bottom: var(--space-sm);
+    }
+
+    .about-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--color-ink);
+      margin-bottom: var(--space-md);
+    }
+
+    .about-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--color-gray);
+    }
+
+    .about-image {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--color-divider), var(--color-paper));
+      position: relative;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      bottom: 20px;
+      left: 20px;
+      border: 1px solid var(--color-red);
+      opacity: 0.3;
+    }
+
+    /* ========================================
+       Services Section Preview
+       ======================================== */
+    .services {
+      padding: var(--space-3xl) var(--space-lg);
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-red);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-ink);
+    }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .service-card {
+      padding: var(--space-xl);
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-divider);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      border-color: var(--color-red);
+      transform: translateY(-5px);
+    }
+
+    .service-number {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--color-red);
+      opacity: 0.5;
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-desc {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--color-gray);
+    }
+
+    /* ========================================
+       Footer Preview
+       ======================================== */
+    .footer {
+      padding: var(--space-2xl) var(--space-lg);
+      background-color: var(--color-ink);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--color-paper);
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-text {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 300;
+      color: var(--color-gray);
+    }
+
+    /* ========================================
+       Animations
+       ======================================== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes expandDivider {
+      from {
+        width: 0;
+      }
+      to {
+        width: min(200px, 50%);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(10px);
+      }
+    }
+
+    /* ========================================
+       Responsive Design
+       ======================================== */
+    @media (max-width: 768px) {
+      .header {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding: var(--space-2xl) var(--space-md);
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+
+      .hero-stat-divider {
+        display: none;
+      }
+
+      .about-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about-image {
+        order: -1;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    /* ========================================
+       Design Notes (for preview only)
+       ======================================== */
+    .design-notes {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--color-ink);
+      color: var(--color-paper);
+      padding: var(--space-md);
+      max-width: 300px;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      z-index: 1001;
+      border-left: 3px solid var(--color-red);
+    }
+
+    .design-notes h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      margin-bottom: var(--space-xs);
+      color: var(--color-red);
+    }
+
+    .design-notes ul {
+      margin: 0;
+      padding-left: var(--space-md);
+    }
+
+    .design-notes li {
+      margin-bottom: 4px;
+    }
+
+    .close-notes {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--color-gray);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--color-red);
+      color: var(--color-paper);
+      padding: 2px 8px;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+    }
+  </style>
+</head>
+<body>
+  <!-- Grain Texture Overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo">Daniel Xing</a>
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#contact" class="nav-cta">Let's Talk</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-name">
+        <span class="hero-name-first">Daniel</span>
+        <span class="hero-name-last">Xing</span>
+      </h1>
+
+      <div class="hero-divider"></div>
+
+      <p class="hero-tagline">
+        <span class="hero-tagline-accent">AI-Driven</span> China Marketing Expert
+      </p>
+
+      <div class="hero-stats">
+        <span class="hero-stat">20+ Years</span>
+        <span class="hero-stat-divider">/</span>
+        <span class="hero-stat">150+ Projects</span>
+        <span class="hero-stat-divider">/</span>
+        <span class="hero-stat">$10M+ Value</span>
+      </div>
+
+      <a href="#work" class="hero-cta">
+        Explore Work
+        <span class="hero-cta-arrow">&rarr;</span>
+      </a>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-indicator-line"></div>
+    </div>
+  </section>
+
+  <!-- About Section Preview -->
+  <section class="about" id="about">
+    <div class="about-container">
+      <div class="about-content">
+        <span class="about-label">About</span>
+        <h2 class="about-heading">Bridging Global Brands to China's Digital Ecosystem</h2>
+        <p class="about-text">
+          With over two decades of experience navigating China's rapidly evolving digital landscape,
+          I help international brands establish authentic connections with Chinese consumers through
+          strategic marketing, localized content, and data-driven campaigns across WeChat, Xiaohongshu,
+          Douyin, and beyond.
+        </p>
+      </div>
+      <div class="about-image"></div>
+    </div>
+  </section>
+
+  <!-- Services Section Preview -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <span class="section-label">Services</span>
+      <h2 class="section-heading">What I Do</h2>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <span class="service-number">01</span>
+        <h3 class="service-title">Social Media Management</h3>
+        <p class="service-desc">WeChat, Xiaohongshu, Douyin strategy and content creation with AI-powered optimization.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">02</span>
+        <h3 class="service-title">Market Entry Strategy</h3>
+        <p class="service-desc">Brand localization, regulatory compliance, and competitor analysis for China market.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">03</span>
+        <h3 class="service-title">Marketing Operations</h3>
+        <p class="service-desc">Data-driven campaigns with real-time dashboards and ROI optimization.</p>
+      </article>
+
+      <article class="service-card">
+        <span class="service-number">04</span>
+        <h3 class="service-title">E-commerce Solutions</h3>
+        <p class="service-desc">Multi-platform launch and optimization across eBay, Amazon, Tmall, and more.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Footer Preview -->
+  <footer class="footer">
+    <div class="footer-logo">Daniel Xing</div>
+    <p class="footer-text">AI-Driven China Marketing Expert</p>
+  </footer>
+
+  <!-- Design Notes Panel -->
+  <div class="design-notes" id="designNotes">
+    <button class="close-notes" onclick="document.getElementById('designNotes').style.display='none'">&times;</button>
+    <span class="version-badge">V10</span>
+    <h4>Luxury + Architect</h4>
+    <ul>
+      <li>V1 Luxury 简洁布局</li>
+      <li>V9 Architect 配色</li>
+      <li>浅灰纸色背景 #f4f3f0</li>
+      <li>藏青墨水文字 #1a2744</li>
+      <li>红色强调 #c94c4c</li>
+      <li>Cormorant Garamond + Outfit</li>
+    </ul>
+  </div>
+</body>
+</html>

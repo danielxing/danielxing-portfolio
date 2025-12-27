@@ -1,0 +1,259 @@
+/* V10 Luxury Minimal Contact */
+.contact {
+  background-color: var(--color-bg-secondary);
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s var(--ease-out);
+}
+
+.contact-content.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-header {
+  margin-bottom: var(--space-12);
+}
+
+.contact-description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-gray);
+  max-width: 600px;
+  margin: var(--space-6) auto 0;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-12);
+}
+
+.contact-link-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-8);
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-divider);
+  text-align: left;
+  transition: all var(--transition-fast);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.contact-content.animate .contact-link-card {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s var(--ease-out) forwards;
+}
+
+.contact-link-card:hover {
+  border-color: var(--color-red);
+  transform: translateY(-2px);
+}
+
+.contact-link-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-bg);
+  color: var(--color-red);
+}
+
+.contact-link-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-link-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contact-link-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+.contact-link-value {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.contact-link-description {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-gray);
+}
+
+.contact-link-arrow {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-gray);
+  transition: all var(--transition-fast);
+}
+
+.contact-link-card:hover .contact-link-arrow {
+  color: var(--color-red);
+  transform: translateX(4px);
+}
+
+.contact-link-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-cta {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-divider);
+}
+
+.contact-cta-text {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  color: var(--color-gray);
+}
+
+@media (min-width: 768px) {
+  .contact-link-card {
+    padding: var(--space-6) var(--space-8);
+  }
+
+  .contact-link-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .contact-link-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* WeChat QR Modal */
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 39, 68, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.qr-modal {
+  position: relative;
+  background-color: var(--color-paper);
+  padding: var(--space-8);
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray);
+  transition: color var(--transition-fast);
+}
+
+.qr-modal-close:hover {
+  color: var(--color-ink);
+}
+
+.qr-modal-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.qr-modal-content {
+  padding-top: var(--space-4);
+}
+
+.qr-modal-image {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin-bottom: var(--space-6);
+}
+
+.qr-modal-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.qr-modal-text-cn {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-gray);
+}
+
+/* Button reset for contact-link-card when used as button */
+button.contact-link-card {
+  cursor: pointer;
+  font-family: inherit;
+  border: 1px solid var(--color-divider);
+  width: 100%;
+}
