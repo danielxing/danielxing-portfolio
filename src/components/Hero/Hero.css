@@ -91,6 +91,16 @@
   color: var(--color-divider);
 }
 
+.hero__stat--link {
+  color: var(--color-gray-light);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.hero__stat--link:hover {
+  color: var(--color-red);
+}
+
 /* CTA Link */
 .hero__cta {
   display: inline-flex;

@@ -58,6 +58,15 @@ export default function Hero() {
             <span className="hero__stat">150+ Projects</span>
             <span className="hero__stat-divider">/</span>
             <span className="hero__stat">$10M+ Value</span>
+            <span className="hero__stat-divider">/</span>
+            <a
+              href="https://www.toptal.com/marketing/resume/daniel-xing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero__stat hero__stat--link"
+            >
+              Toptal Top 3%
+            </a>
           </motion.div>
 
           {/* CTA */}
