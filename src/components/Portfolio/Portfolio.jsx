@@ -23,42 +23,74 @@ export default function Portfolio({ onOpenCaseStudy }) {
         </motion.div>
 
         <div className="portfolio__grid">
-          {portfolio.map((project, index) => (
+          {[...portfolio].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)).map((project, index) => (
             <motion.article
               key={project.id}
-              className="portfolio__card"
+              className={`portfolio__card${project.featured ? ' portfolio__card--featured' : ''}`}
               initial={{ opacity: 0, y: 30 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 * (index + 1) }}
             >
-              <div className="portfolio__card-header">
-                <span className="portfolio__card-category">{project.category}</span>
-                <h3 className="portfolio__card-title">{project.title}</h3>
-              </div>
+              {project.featured ? (
+                <>
+                  <div className="portfolio__featured-content">
+                    <span className="portfolio__featured-badge">Featured Case Study</span>
+                    <span className="portfolio__card-category">{project.category}</span>
+                    <h3 className="portfolio__card-title">{project.title}</h3>
+                    <p className="portfolio__card-description">{project.description}</p>
+                    {project.caseStudyId && (
+                      <button
+                        className="portfolio__link"
+                        onClick={() => onOpenCaseStudy(project.caseStudyId)}
+                      >
+                        View Case Study
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                  <div className="portfolio__featured-metrics">
+                    {project.metrics.map((m, i) => (
+                      <div key={i} className="portfolio__metric">
+                        <span className="portfolio__metric-value">{m.value}</span>
+                        <span className="portfolio__metric-label">{m.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="portfolio__card-header">
+                    <span className="portfolio__card-category">{project.category}</span>
+                    <h3 className="portfolio__card-title">{project.title}</h3>
+                  </div>
 
-              <p className="portfolio__card-description">{project.description}</p>
+                  <p className="portfolio__card-description">{project.description}</p>
 
-              {project.caseStudyId ? (
-                <button
-                  className="portfolio__link"
-                  onClick={() => onOpenCaseStudy(project.caseStudyId)}
-                >
-                  View Case Study
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              ) : project.pdf ? (
-                <button
-                  className="portfolio__link"
-                  onClick={() => setSelectedPdf({ url: project.pdf, title: project.title })}
-                >
-                  View Case Study
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
-              ) : null}
+                  {project.caseStudyId ? (
+                    <button
+                      className="portfolio__link"
+                      onClick={() => onOpenCaseStudy(project.caseStudyId)}
+                    >
+                      View Case Study
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  ) : project.pdf ? (
+                    <button
+                      className="portfolio__link"
+                      onClick={() => setSelectedPdf({ url: project.pdf, title: project.title })}
+                    >
+                      View Case Study
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  ) : null}
+                </>
+              )}
             </motion.article>
           ))}
         </div>

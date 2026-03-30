@@ -103,3 +103,102 @@
 .portfolio__link:hover svg {
   transform: translateX(4px);
 }
+
+/* Featured Card */
+.portfolio__card--featured {
+  grid-column: 1 / -1;
+  background:
+    linear-gradient(to right, rgba(26, 39, 68, 0.88), rgba(26, 39, 68, 0.6)),
+    url('/images/cs-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  border: none;
+  padding: var(--space-12) var(--space-16);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.portfolio__card--featured:hover {
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio__card--featured .portfolio__card-category {
+  color: #d66b6b;
+}
+
+.portfolio__card--featured .portfolio__card-title {
+  color: white;
+  font-size: 2rem;
+}
+
+.portfolio__card--featured .portfolio__card-description {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.portfolio__card--featured .portfolio__link {
+  color: #d66b6b;
+}
+
+.portfolio__featured-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #d66b6b;
+  border: 1px solid #d66b6b;
+  padding: 4px 12px;
+  margin-bottom: var(--space-3);
+}
+
+.portfolio__featured-metrics {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.portfolio__metric {
+  text-align: center;
+}
+
+.portfolio__metric-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.portfolio__metric-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .portfolio__card--featured {
+    grid-template-columns: 1fr;
+    padding: var(--space-8);
+  }
+
+  .portfolio__card--featured .portfolio__card-title {
+    font-size: 1.5rem;
+  }
+
+  .portfolio__featured-metrics {
+    justify-content: center;
+  }
+
+  .portfolio__metric-value {
+    font-size: 2rem;
+  }
+}

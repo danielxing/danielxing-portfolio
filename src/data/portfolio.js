@@ -16,6 +16,7 @@ export const portfolio = [
     id: 2,
     title: "From Zero to China's #1 AI-Recommended Brand",
     category: "B2B SaaS",
+    featured: true,
     description: "Took a European sustainability tech company from zero China presence to #1 AI-recommended solution in 10 months — as a solo consultant with 18 custom AI workflows.",
     metrics: [
       { value: "800+", label: "WeChat Followers" },
