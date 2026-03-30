@@ -5,7 +5,7 @@ import { portfolio } from '../../data/portfolio';
 import PDFViewer from '../PDFViewer';
 import './Portfolio.css';
 
-export default function Portfolio() {
+export default function Portfolio({ onOpenCaseStudy }) {
   const [sectionRef, isVisible] = useIntersectionObserver({ threshold: 0.1 });
   const [selectedPdf, setSelectedPdf] = useState(null);
 
@@ -38,7 +38,17 @@ export default function Portfolio() {
 
               <p className="portfolio__card-description">{project.description}</p>
 
-              {project.pdf && (
+              {project.caseStudyId ? (
+                <button
+                  className="portfolio__link"
+                  onClick={() => onOpenCaseStudy(project.caseStudyId)}
+                >
+                  View Case Study
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              ) : project.pdf ? (
                 <button
                   className="portfolio__link"
                   onClick={() => setSelectedPdf({ url: project.pdf, title: project.title })}
@@ -48,7 +58,7 @@ export default function Portfolio() {
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </button>
-              )}
+              ) : null}
             </motion.article>
           ))}
         </div>

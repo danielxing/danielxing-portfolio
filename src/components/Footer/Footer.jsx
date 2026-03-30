@@ -53,7 +53,7 @@ function Footer() {
               Daniel Xing
             </a>
             <p className="footer-tagline">
-              Your Trusted Partner for China Success — AI-Powered
+              AI-Driven China Marketing Expert
             </p>
           </div>
 

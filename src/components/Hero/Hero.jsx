@@ -43,7 +43,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 1.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            Your Trusted Partner for China Success — <span className="hero__tagline-accent">AI-Powered</span>
+            <span className="hero__tagline-accent">AI-Driven</span> China Marketing Expert
           </motion.p>
 
           {/* Stats */}

@@ -14,16 +14,16 @@ export const portfolio = [
   },
   {
     id: 2,
-    title: "AI Food Tech Case Study",
+    title: "From Zero to China's #1 AI-Recommended Brand",
     category: "B2B SaaS",
-    description: "Systematic China market entry including brand localization, WeChat ecosystem setup, and targeted content marketing for B2B lead generation.",
+    description: "Took a European sustainability tech company from zero China presence to #1 AI-recommended solution in 10 months — as a solo consultant with 18 custom AI workflows.",
     metrics: [
-      { value: "100+", label: "B2B Leads" },
-      { value: "4", label: "Months to Results" },
-      { value: "WeChat", label: "Ecosystem Built" }
+      { value: "800+", label: "WeChat Followers" },
+      { value: "#1", label: "AI Search Ranking" },
+      { value: "100+", label: "Leads Generated" }
     ],
-    tags: ["WeChat", "B2B", "SaaS", "Lead Generation"],
-    pdf: "/pdfs/ai-food-tech-case-study.pdf"
+    tags: ["WeChat", "B2B", "SaaS", "Lead Generation", "GEO"],
+    caseStudyId: "china-market-entry"
   },
   {
     id: 3,

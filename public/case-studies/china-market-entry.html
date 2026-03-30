@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Daniel Xing</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #09090b; --ink-80: #1a1814; --ink-60: #2c2418;
+  --cyan: #c07a50; --cyan-m: #a86742; --cyan-p: #faf0e8;
+  --amber: #c07a50; --amber-l: #d4956a;
+  --stone: #faf8f5; --white: #ffffff;
+  --text: #2c2418; --text-m: #6b5d50; --text-l: #9a8d80;
+  --border: #f0ebe4; --green: #1a6b5c; --red: #c44040;
+  --card: 0 1px 3px rgba(44,36,24,0.04), 0 6px 16px rgba(44,36,24,0.07);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'DM Sans',sans-serif; background:#e8e2da; color:var(--text);
+  padding:48px 20px; display:flex; flex-direction:column; align-items:center; gap:36px;
+  -webkit-font-smoothing:antialiased;
+}
+.slide {
+  width:1120px; height:630px; background:var(--white); border-radius:6px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.14),0 2px 8px rgba(0,0,0,0.08);
+  overflow:hidden; position:relative; flex-shrink:0;
+}
+.slide-label {
+  width:1120px; text-align:left; font-size:11px; font-weight:500;
+  color:#9a8d80; margin-bottom:-24px; letter-spacing:1.5px; text-transform:uppercase;
+}
+.ic {
+  width:30px; height:30px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700; color:var(--white); flex-shrink:0;
+}
+/* Noise grain texture for dark slides */
+.grid-bg::after {
+  content:''; position:absolute; top:0;left:0;right:0;bottom:0;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.5;
+}
+
+/* ===== S1: TITLE ===== */
+.s1 {
+  background:var(--ink); display:flex; flex-direction:column;
+  justify-content:center; align-items:center; text-align:center; padding:60px 100px; position:relative;
+}
+.s1::before {
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(9,9,11,0.72) 0%, rgba(9,9,11,0.55) 40%, rgba(9,9,11,0.78) 100%),
+    url('bg-city.jpg') center/cover no-repeat;
+}
+.s1 * { position:relative; z-index:1; }
+.s1 .over { font-size:11px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--cyan); margin-bottom:32px; }
+.s1 h1 {
+  font-family:'Outfit',sans-serif; font-size:48px; font-weight:700; color:var(--white);
+  line-height:1.1; margin-bottom:20px; max-width:780px; letter-spacing:-0.5px;
+}
+.s1 h1 em { font-style:normal; color:var(--amber); background:linear-gradient(135deg,#c07a50,#d4956a); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.s1 .sub { font-size:19px; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.6; max-width:520px; margin-bottom:48px; }
+.s1 .rule { width:48px; height:2px; background:linear-gradient(90deg,#c07a50,#d4956a); margin-bottom:22px; opacity:0.8; }
+.s1 .by { font-size:14px; color:rgba(255,255,255,0.4); letter-spacing:0.8px; }
+
+/* ===== COMMON ===== */
+.ss { display:flex; flex-direction:column; }
+.sh { background:var(--ink); padding:18px 48px; display:flex; align-items:center; gap:14px; }
+.sh h2 { font-family:'Outfit',sans-serif; font-size:21px; font-weight:600; color:var(--white); }
+.badge { font-size:10px; font-weight:600; color:var(--amber); background:rgba(192,122,80,0.12); padding:4px 14px; border-radius:20px; letter-spacing:0.8px; text-transform:uppercase; }
+
+/* ===== S2: CHALLENGE ===== */
+.s2-body { display:flex; flex:1; padding:32px 48px; gap:32px; background:var(--stone); }
+.cc { width:280px; background:var(--white); border-radius:12px; padding:28px; box-shadow:var(--card); flex-shrink:0; border-top:3px solid var(--cyan); }
+.cc h3 { font-size:10px; font-weight:700; color:var(--cyan); text-transform:uppercase; letter-spacing:2px; margin-bottom:20px; }
+.cr { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.cr:last-child { border-bottom:none; }
+.cr .k { color:var(--text-m); } .cr .v { font-weight:600; color:var(--text); text-align:right; max-width:150px; }
+.cr .v.red { color:var(--red); font-weight:700; }
+.bl { flex:1; display:flex; flex-direction:column; gap:10px; }
+.bi { background:var(--white); border-radius:10px; padding:16px 20px; box-shadow:var(--card); display:flex; align-items:flex-start; gap:14px; font-size:13.5px; line-height:1.5; }
+.bn { width:26px; height:26px; background:var(--ink); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.cb { background:var(--ink-80); padding:16px 48px; display:flex; align-items:center; gap:14px; }
+.cb .accent { width:3px; height:28px; background:linear-gradient(180deg,#c07a50,#d4956a); border-radius:2px; flex-shrink:0; }
+.cb p { font-size:13.5px; color:rgba(255,255,255,0.8); line-height:1.55; }
+.cb strong { color:var(--amber); }
+
+/* ===== S3: HERO ===== */
+.s3 { display:flex; flex-direction:column; background:linear-gradient(160deg,#09090b 0%,#15120e 40%,#09090b 100%); }
+.s3-h { padding:22px 48px; display:flex; align-items:center; gap:14px; }
+.s3-h .mk { width:30px; height:30px; background:linear-gradient(135deg,#c07a50,#a86742); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; color:var(--white); font-weight:800; }
+.s3-h h2 { font-family:'Outfit',sans-serif; font-size:21px; font-weight:600; color:var(--white); }
+.s3-b { flex:1; display:flex; padding:0 48px 14px; gap:22px; }
+.pc { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(192,122,80,0.12); border-radius:14px; padding:24px 26px; display:flex; flex-direction:column; }
+.pc .po { font-size:10px; font-weight:600; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:2px; margin-bottom:4px; }
+.pc .pn { font-size:16px; font-weight:700; color:var(--white); margin-bottom:16px; }
+.rk { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,#c07a50,#a86742); color:var(--white); font-size:26px; font-weight:800; padding:5px 16px; border-radius:8px; margin-bottom:16px; width:fit-content; letter-spacing:-0.5px; }
+.rk .rt { font-size:12px; font-weight:700; letter-spacing:0; }
+.qb { background:rgba(255,255,255,0.03); border-left:2px solid var(--amber); padding:10px 16px; border-radius:0 8px 8px 0; margin-bottom:14px; }
+.qb .cn { font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; color:var(--amber-l); margin-bottom:2px; }
+.qb .en { font-size:11px; color:rgba(255,255,255,0.35); font-style:italic; }
+.pc .nt { font-size:11.5px; color:rgba(255,255,255,0.32); margin-top:auto; line-height:1.45; }
+.hi { margin:0 48px 12px; padding:14px 22px; background:rgba(192,122,80,0.06); border:1px solid rgba(192,122,80,0.12); border-radius:10px; }
+.hi p { font-size:13px; color:rgba(255,255,255,0.65); line-height:1.65; }
+.hi strong { color:var(--cyan); font-weight:600; }
+.ts { font-size:10px; color:rgba(255,255,255,0.22); text-align:center; padding:0 48px 14px; letter-spacing:0.5px; }
+
+/* ===== S4: STRATEGY ===== */
+.s4-b { flex:1; display:flex; flex-direction:column; padding:28px 48px 20px; background:var(--stone); gap:18px; }
+.phs { display:flex; gap:18px; flex:1; }
+.ph { flex:1; background:var(--white); border-radius:12px; padding:24px; box-shadow:var(--card); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.ph::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; }
+.ph.p1::before { background:var(--cyan); } .ph.p2::before { background:linear-gradient(90deg,#c07a50,#d4956a); } .ph.p3::before { background:var(--green); }
+.ph-l { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.8px; margin-bottom:6px; }
+.ph.p1 .ph-l { color:var(--cyan); } .ph.p2 .ph-l { color:var(--amber); } .ph.p3 .ph-l { color:var(--green); }
+.ph h3 { font-family:'Outfit',sans-serif; font-size:18px; font-weight:600; color:var(--text); margin-bottom:14px; }
+.ph ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.ph li { font-size:13px; color:var(--text-m); padding-left:14px; position:relative; line-height:1.5; }
+.ph li::before { content:''; position:absolute; left:0; top:8px; width:4px; height:4px; border-radius:50%; background:var(--text-l); }
+.ab { background:var(--white); border-radius:10px; padding:18px 26px; box-shadow:var(--card); display:flex; align-items:center; gap:16px; border-left:3px solid var(--cyan); }
+.ab p { font-size:13px; color:var(--text-m); line-height:1.55; }
+.ab strong { color:var(--cyan); font-weight:700; }
+
+/* ===== S5: GROWTH ===== */
+.s5-b { flex:1; display:flex; flex-direction:column; padding:24px 48px 18px; background:var(--stone); gap:16px; }
+.kpis { display:flex; gap:18px; }
+.kp { flex:1; background:var(--white); border-radius:12px; padding:22px 24px; box-shadow:var(--card); display:flex; flex-direction:column; }
+.kp-h { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.kp-h h3 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+.kp .big { font-size:36px; font-weight:800; color:var(--ink); line-height:1; margin-bottom:6px; letter-spacing:-1px; }
+.kp .big .u { font-size:14px; font-weight:500; color:var(--text-m); letter-spacing:0; }
+.kp .inf { font-size:12.5px; color:var(--text-m); line-height:1.55; }
+.kp .inf strong { color:var(--text); font-weight:600; }
+.br { display:flex; gap:18px; flex:1; }
+.pip { flex:1; background:var(--white); border-radius:12px; padding:20px 24px; box-shadow:var(--card); }
+.pip h3 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+.pf { display:flex; flex-direction:column; gap:8px; }
+.ps { padding:11px 18px; border-radius:8px; display:flex; align-items:center; gap:14px; }
+.ps.a { background:rgba(192,122,80,0.05); border-left:3px solid var(--cyan); }
+.ps.b { background:rgba(192,122,80,0.08); border-left:3px solid var(--amber); }
+.ps.c { background:rgba(26,107,92,0.05); border-left:3px solid var(--green); }
+.ps .pn { font-size:22px; font-weight:800; min-width:55px; letter-spacing:-0.5px; }
+.ps.a .pn { color:var(--cyan); } .ps.b .pn { color:var(--amber); } .ps.c .pn { color:var(--green); }
+.ps .pt { font-size:12.5px; color:var(--text-m); line-height:1.4; }
+.ps .pt strong { color:var(--text); }
+.xf { width:350px; flex-shrink:0; background:var(--white); border-radius:12px; padding:22px 26px; box-shadow:var(--card); display:flex; flex-direction:column; }
+.xf h3 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; }
+.xf-r { display:flex; gap:18px; flex:1; }
+.xf-c { flex:1; display:flex; flex-direction:column; gap:10px; }
+.xf-lb { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; }
+.xf-lb.bf { color:var(--red); } .xf-lb.af { color:var(--green); }
+.xi { display:flex; justify-content:space-between; font-size:12.5px; padding:5px 0; }
+.xi .xk { color:var(--text-m); } .xi .xv { font-weight:700; }
+.xi .xv.r { color:var(--red); } .xi .xv.g { color:var(--green); }
+.xf-a { display:flex; align-items:center; color:var(--text-l); font-size:18px; font-weight:700; }
+
+/* ===== S6: ADVANTAGE ===== */
+.s6-b { flex:1; display:flex; padding:22px 48px 18px; gap:22px; background:var(--stone); }
+.cpc { width:280px; display:flex; flex-direction:column; gap:12px; flex-shrink:0; }
+.cp { background:var(--white); border-radius:12px; padding:18px 20px; box-shadow:var(--card); flex:1; }
+.cp.old { border-top:3px solid var(--border); } .cp.new { border-top:3px solid var(--green); }
+.cp h3 { font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; margin-bottom:10px; }
+.cp.old h3 { color:var(--text-l); } .cp.new h3 { color:var(--green); }
+.rl { list-style:none; display:flex; flex-direction:column; gap:3px; }
+.rl li { font-size:12.5px; padding:2px 0 2px 18px; position:relative; line-height:1.35; }
+.cp.old .rl li { color:var(--text-l); text-decoration:line-through; text-decoration-color:var(--border); }
+.cp.old .rl li::before { content:'\00d7'; position:absolute; left:0; color:var(--border); font-weight:700; font-size:14px; }
+.cp.new .rl li { color:var(--text); }
+.cp.new .rl li::before { content:'\2713'; position:absolute; left:0; color:var(--green); font-weight:700; }
+.cp-t { margin-top:10px; padding-top:10px; border-top:1px solid var(--border); font-size:12.5px; font-weight:700; }
+.cp.old .cp-t { color:var(--text-l); } .cp.new .cp-t { color:var(--green); }
+.wfc { flex:1; display:flex; flex-direction:column; gap:10px; }
+.wfc > h3 { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+.wf { background:var(--white); border-radius:10px; padding:12px 16px; box-shadow:var(--card); display:flex; align-items:flex-start; gap:12px; flex:1; }
+.wfi { width:38px; height:38px; background:var(--cyan-p); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:700; font-size:13px; color:var(--cyan-m); }
+.wf h4 { font-size:13px; font-weight:700; color:var(--text); margin-bottom:3px; }
+.wf p { font-size:12px; color:var(--text-m); line-height:1.45; }
+.wt { margin-left:auto; font-size:10px; font-weight:700; color:var(--green); background:rgba(26,107,92,0.07); padding:4px 10px; border-radius:20px; white-space:nowrap; flex-shrink:0; }
+
+/* ===== S7: SCORECARD ===== */
+.s7-b { flex:1; display:flex; flex-direction:column; padding:28px 48px 20px; background:var(--stone); gap:20px; }
+.sg { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:18px; flex:1; }
+.sc { background:var(--white); border-radius:12px; padding:24px; box-shadow:var(--card); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+.sc .n { font-size:44px; font-weight:800; color:var(--ink); line-height:1; letter-spacing:-1px; }
+.sc .n.cy, .sc .n.am, .sc .n.gr { color:var(--amber); }
+.sc .l { font-size:12px; color:var(--text-m); margin-top:8px; line-height:1.35; font-weight:500; }
+.sc.gt, .sc.ct, .sc.grt { border-top:3px solid var(--amber); }
+.sf { text-align:center; padding:2px 0; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.sf .m { font-size:14px; color:var(--text-m); }
+.sf .m strong { color:var(--ink); font-weight:700; }
+.sf .t { font-size:12px; color:var(--green); font-weight:600; background:rgba(26,107,92,0.07); padding:6px 20px; border-radius:20px; }
+
+/* ===== S8: CTA ===== */
+.s8 { background:var(--ink); display:flex; flex-direction:column; position:relative; }
+.s8::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 75% 45%,rgba(192,122,80,0.07) 0%,transparent 55%); }
+.s8 * { position:relative; z-index:1; }
+.s8-q { padding:28px 72px 0; text-align:center; }
+.s8-q p { font-family:'Outfit',sans-serif; font-size:16px; color:rgba(255,255,255,0.55); font-style:italic; line-height:1.65; max-width:680px; margin:0 auto; font-weight:300; }
+.s8-q strong { color:rgba(255,255,255,0.85); font-weight:600; }
+.s8-m { flex:1; display:flex; padding:24px 72px 22px; gap:48px; align-items:center; }
+.s8-l { flex:1; }
+.s8-l h2 { font-family:'Outfit',sans-serif; font-size:32px; font-weight:700; color:var(--white); line-height:1.2; margin-bottom:24px; letter-spacing:-0.3px; }
+.s8-l h2 em { font-style:normal; color:var(--amber); }
+.s8-bl { list-style:none; display:flex; flex-direction:column; gap:14px; }
+.s8-bl li { font-size:14px; color:rgba(255,255,255,0.7); padding-left:20px; position:relative; line-height:1.5; }
+.s8-bl li::before { content:'\2192'; position:absolute; left:0; color:var(--cyan); font-weight:600; }
+.s8-bl li strong { color:rgba(255,255,255,0.92); }
+.s8-r { width:340px; background:rgba(255,255,255,0.03); border:1px solid rgba(192,122,80,0.15); border-radius:14px; padding:28px; flex-shrink:0; }
+.s8-r h3 { font-family:'Outfit',sans-serif; font-size:20px; font-weight:600; color:var(--white); margin-bottom:2px; }
+.s8-r .ro { font-size:12px; color:var(--cyan); margin-bottom:2px; letter-spacing:0.3px; }
+.s8-r .cd { font-size:11px; color:rgba(255,255,255,0.3); margin-bottom:18px; }
+.co { display:flex; align-items:center; gap:12px; padding:5px 0; font-size:12.5px; color:rgba(255,255,255,0.5); }
+.co .d { width:18px; height:18px; border-radius:4px; background:rgba(192,122,80,0.12); display:flex; align-items:center; justify-content:center; font-size:9px; color:var(--cyan); font-weight:600; }
+.s8-btn { margin-top:18px; display:block; text-align:center; background:linear-gradient(135deg,#c07a50,#d4956a); color:var(--white); padding:12px 24px; border-radius:8px; font-size:13px; font-weight:700; letter-spacing:0.3px; }
+.s8-ck { margin-top:10px; display:flex; flex-direction:column; gap:4px; }
+.s8-ck .ci { font-size:11px; color:rgba(255,255,255,0.35); padding-left:14px; position:relative; }
+.s8-ck .ci::before { content:'\2713'; position:absolute; left:0; color:var(--cyan); font-weight:700; font-size:9px; }
+.s8-av { margin-top:14px; text-align:center; font-size:11px; font-weight:600; color:var(--amber); background:rgba(192,122,80,0.1); padding:5px 14px; border-radius:20px; }
+.s8-f { padding:12px 72px; border-top:1px solid rgba(255,255,255,0.05); }
+.s8-f p { font-size:11px; color:rgba(255,255,255,0.28); text-align:center; letter-spacing:0.3px; }
+.s8-f strong { color:rgba(255,255,255,0.45); }
+
+/* ===== PRINT / PDF ===== */
+@media print {
+  @page { size: 1120px 630px; margin: 0; }
+  body { background: none; padding: 0; gap: 0; }
+  .slide-label { display: none; }
+  .slide {
+    box-shadow: none; border-radius: 0;
+    page-break-after: always; page-break-inside: avoid;
+    width: 1120px; height: 630px;
+  }
+  .slide:last-child { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- S1 -->
+<div class="slide-label">Slide 1 / 8 — Title</div>
+<div class="slide s1 grid-bg">
+  <div class="over">Case Study</div>
+  <h1>From Zero to China's <em>#1 AI-Recommended</em> Brand</h1>
+  <div class="sub">One person. Zero presence. 10 months.<br>Here's what happened.</div>
+  <div class="rule"></div>
+  <div class="by">Daniel Xing &nbsp;&middot;&nbsp; China Market Entry — B2B &amp; B2C Tech</div>
+</div>
+
+<!-- S2 -->
+<div class="slide-label">Slide 2 / 8 — The Challenge</div>
+<div class="slide ss">
+  <div class="sh"><h2>The Challenge</h2><span class="badge">2025</span></div>
+  <div class="s2-body">
+    <div class="cc">
+      <h3>Client Profile</h3>
+      <div class="cr"><span class="k">Industry</span><span class="v">Sustainability Tech (B2B SaaS)</span></div>
+      <div class="cr"><span class="k">HQ</span><span class="v">Europe</span></div>
+      <div class="cr"><span class="k">Product</span><span class="v">AI-powered operational efficiency for commercial facilities</span></div>
+      <div class="cr"><span class="k">Global Scale</span><span class="v">Deployed across multiple countries globally</span></div>
+      <div class="cr"><span class="k">China Status</span><span class="v red">Zero Presence</span></div>
+    </div>
+    <div class="bl">
+      <div class="bi"><span class="bn">1</span><span>No digital presence in China — no WeChat, no website, no search visibility whatsoever</span></div>
+      <div class="bi"><span class="bn">2</span><span>All materials in English only — no localized content for Chinese decision-makers</span></div>
+      <div class="bi"><span class="bn">3</span><span>A local competitor actively capturing enterprise clients across Greater China</span></div>
+      <div class="bi"><span class="bn">4</span><span>No lead generation infrastructure — unable to reach enterprise executives in China</span></div>
+    </div>
+  </div>
+  <div class="cb"><span class="accent"></span><p><strong>The stakes:</strong> Aggressive growth targets required China market pipeline within 12 months — with a one-person team. What happened next surprised even the client.</p></div>
+</div>
+
+<!-- S3 -->
+<div class="slide-label">Slide 3 / 8 — The Breakthrough</div>
+<div class="slide s3 grid-bg">
+  <div class="s3-h"><span class="mk">#1</span><h2>The Result: #1 AI-Recommended Solution in China</h2></div>
+  <div class="s3-b">
+    <div class="pc">
+      <div class="po">Platform A</div><div class="pn">China's #1 AI Assistant</div>
+      <div class="rk">#1 <span class="rt">Recommended</span></div>
+      <div class="qb"><div class="cn">"全球市场领导者"</div><div class="en">Global Market Leader</div></div>
+    </div>
+    <div class="pc">
+      <div class="po">Platform B</div><div class="pn">China's #2 AI Assistant</div>
+      <div class="rk">#1 <span class="rt">First Choice</span></div>
+      <div class="qb"><div class="cn">"全球龙头，首选方案"</div><div class="en">Global Leader, First Choice Solution</div></div>
+    </div>
+  </div>
+  <div class="hi"><p><strong>10 months of consistent Chinese-language content</strong> made this client the #1 AI-recommended solution — organically. When industry executives ask China's top AI assistants for recommendations, they now cite the articles we published.</p></div>
+  <div class="ts">Tested 2026 &middot; Industry-specific AI solution recommendation query in Chinese</div>
+</div>
+
+<!-- S4 -->
+<div class="slide-label">Slide 4 / 8 — How We Got There</div>
+<div class="slide ss">
+  <div class="sh"><h2>How We Got There</h2><span class="badge">Systematic &middot; AI-Powered &middot; Full-Stack</span></div>
+  <div class="s4-b">
+    <div class="phs">
+      <div class="ph p1"><div class="ph-l">Phase 1 &middot; Months 1–3</div><h3>Foundation</h3><ul><li>WeChat ecosystem setup (Service Account + Video Account)</li><li>Brand localization — terminology, visual identity, tone of voice</li><li>Content strategy and editorial calendar</li><li>Competitor intelligence and market research</li></ul></div>
+      <div class="ph p2"><div class="ph-l">Phase 2 &middot; Months 4–7</div><h3>Scale</h3><ul><li>Paid advertising launch (WeChat Moments, Feed, Search)</li><li>Media &amp; KOL partnership network</li><li>Video content localization pipeline</li><li>Chinese website build, ICP filing &amp; deployment</li></ul></div>
+      <div class="ph p3"><div class="ph-l">Phase 3 &middot; Months 8–10</div><h3>Dominance</h3><ul><li>Generative Engine Optimization (GEO) strategy</li><li>High-intent lead conversion &amp; meeting booking</li><li>Achieved #1 AI-recommended status in China</li><li>HQ meetings with China's top enterprise groups</li></ul></div>
+    </div>
+    <div class="ab"><div class="ic" style="width:36px;height:36px;font-size:14px;background:var(--cyan);">AI</div><p>Behind the scenes: I built <strong>18 custom AI workflows</strong> with Claude Code — not as a tech demo, but because one person literally cannot do 6 people's work otherwise. Every workflow is documented and transferable to client teams.</p></div>
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="slide-label">Slide 5 / 8 — Growth Engine</div>
+<div class="slide ss">
+  <div class="sh"><h2>Growth Engine</h2><span class="badge">Content &middot; Advertising &middot; Partnerships</span></div>
+  <div class="s5-b">
+    <div class="kpis">
+      <div class="kp" style="border-top:3px solid var(--cyan);"><div class="kp-h"><div class="ic" style="background:var(--cyan);">W</div><h3>WeChat Audience</h3></div><div class="big">0 → 800+ <span class="u">followers</span></div><div class="inf"><strong>Targeted B2B audience:</strong> enterprise executives, operations directors, sustainability leads.</div></div>
+      <div class="kp" style="border-top:3px solid var(--amber);"><div class="kp-h"><div class="ic" style="background:var(--amber);">L</div><h3>Lead Generation</h3></div><div class="big">100+ <span class="u">leads</span></div><div class="inf">From paid advertising + KOL partnerships &middot; optimized through weekly A/B testing</div></div>
+      <div class="kp" style="border-top:3px solid var(--green);"><div class="kp-h"><div class="ic" style="background:var(--green);">M</div><h3>Sales Pipeline</h3></div><div class="big">Active <span class="u">pipeline built</span></div><div class="inf">Multiple meetings booked with <strong>tier-1 enterprise group decision-makers</strong>, including HQ-level meetings</div></div>
+    </div>
+    <div class="br">
+      <div class="pip" style="flex:1;"><h3>Growth Pipeline</h3><div class="pf"><div class="ps a"><span class="pn">800+</span><div class="pt"><strong>WeChat Followers</strong> (targeted B2B audience from zero)</div></div><div class="ps b"><span class="pn">100+</span><div class="pt"><strong>Leads Generated</strong> across ad campaigns + KOL partnerships</div></div><div class="ps c"><span class="pn" style="font-size:15px;">Active</span><div class="pt"><strong>Sales Pipeline</strong> — HQ-level meetings with enterprise decision-makers</div></div></div></div>
+      <div class="xf"><h3>The Transformation</h3><div class="xf-r"><div class="xf-c"><div class="xf-lb bf">2025</div><div class="xi"><span class="xk">WeChat</span><span class="xv r">None</span></div><div class="xi"><span class="xk">Website</span><span class="xv r">None</span></div><div class="xi"><span class="xk">Leads</span><span class="xv r">Zero</span></div><div class="xi"><span class="xk">Pipeline</span><span class="xv r">None</span></div></div><div class="xf-a">→</div><div class="xf-c"><div class="xf-lb af">2026</div><div class="xi"><span class="xk">WeChat</span><span class="xv g">800+</span></div><div class="xi"><span class="xk">Website</span><span class="xv g">Live</span></div><div class="xi"><span class="xk">Leads</span><span class="xv g">100+</span></div><div class="xi"><span class="xk">Pipeline</span><span class="xv g">Active</span></div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="slide-label">Slide 6 / 8 — The AI Advantage</div>
+<div class="slide ss">
+  <div class="sh"><h2>The AI Advantage</h2><span class="badge">How One Person Did All of This</span></div>
+  <div class="s6-b">
+    <div class="cpc">
+      <div class="cp old"><h3>Traditional Agency</h3><ul class="rl"><li>Content Writer</li><li>Translator</li><li>Video Editor</li><li>Web Developer</li><li>Ad Specialist</li><li>Designer</li><li>Data Analyst</li></ul><div class="cp-t">= 6–7 person team</div></div>
+      <div class="cp new"><h3>AI-Powered Approach</h3><ul class="rl"><li>1 Cross-functional Strategist</li><li>18 Custom AI Workflows</li><li>Documented &amp; transferable</li></ul><div class="cp-t">= Same output, fraction of the cost</div></div>
+    </div>
+    <div class="wfc">
+      <h3>Workflow Examples</h3>
+      <div class="wf"><div class="wfi">Aa</div><div><h4>Content Creation</h4><p>Chinese article drafts with terminology checks and WeChat HTML formatting</p></div><span class="wt">3hrs → 30min</span></div>
+      <div class="wf"><div class="wfi">CC</div><div><h4>Video Localization</h4><p>English audio → Chinese subtitles via Whisper AI, edited and published</p></div><span class="wt">3–5 days → same day</span></div>
+      <div class="wf"><div class="wfi">W</div><div><h4>Website Development</h4><p>Chinese website built, deployed, and iterated — design, code, content, hosting setup</p></div><span class="wt">Agency weeks → days</span></div>
+      <div class="wf"><div class="wfi">KPI</div><div><h4>Executive Reporting</h4><p>Cross-channel analytics compiled into presentations for global HQ &amp; regional leadership</p></div><span class="wt">2 days → 2 hours</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 -->
+<div class="slide-label">Slide 7 / 8 — 10-Month Scorecard</div>
+<div class="slide ss">
+  <div class="sh"><h2>10-Month Scorecard</h2><span class="badge">2025 – 2026</span></div>
+  <div class="s7-b">
+    <div class="sg">
+      <div class="sc ct"><div class="n cy">800+</div><div class="l">WeChat Followers<br>(from zero)</div></div>
+      <div class="sc gt"><div class="n am">#1</div><div class="l">AI Search Ranking<br>in China</div></div>
+      <div class="sc gt"><div class="n am">100+</div><div class="l">Leads<br>Generated</div></div>
+      <div class="sc ct"><div class="n cy">1</div><div class="l">Person. Full-Stack<br>Delivery.</div></div>
+      <div class="sc gt"><div class="n cy">18</div><div class="l">Custom AI<br>Workflows Built</div></div>
+      <div class="sc grt"><div class="n gr">Live</div><div class="l">Chinese Website<br>Built &amp; Hosted in China</div></div>
+    </div>
+    <div class="sf"><div class="m">All delivered by <strong>a single consultant — no agency, no outsourcing, no team</strong>.</div></div>
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="slide-label">Slide 8 / 8 — Call to Action</div>
+<div class="slide s8 grid-bg">
+  <div class="s8-m">
+    <div class="s8-l">
+      <h2>Your China Market <em>Is Waiting</em>.</h2>
+      <ul class="s8-bl">
+        <li><strong>Systematic market entry</strong> — from zero to full digital presence, not ad-hoc campaigns</li>
+        <li><strong>AI-powered execution</strong> — agency output with freelancer agility and cost</li>
+        <li><strong>Measurable pipeline</strong> — real leads and meetings, not just brand awareness</li>
+      </ul>
+    </div>
+    <div class="s8-r">
+      <h3>Daniel Xing</h3>
+      <div class="ro">AI-Driven China Market Expert</div>
+      <div class="co"><span class="d">@</span><span>danielxing.cn@gmail.com</span></div>
+      <div class="co"><span class="d">W</span><span>danielxing.com</span></div>
+      <div class="co"><span class="d">Li</span><span>linkedin.com/in/danielxing</span></div>
+      <a href="https://cal.com/danielxing/30min" target="_blank" class="s8-btn" style="text-decoration:none;">Book Your Free 30-Min China Market Audit</a>
+      <div class="s8-ck"><div class="ci">Your current China digital visibility score</div><div class="ci">3 quick-win opportunities for your industry</div><div class="ci">Realistic timeline and budget estimate</div></div>
+    </div>
+  </div>
+  <div class="s8-f"><p><strong>Methodology proven across B2B and B2C</strong></p></div>
+</div>
+
+</body>
+</html>
