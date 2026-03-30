@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CaseStudy from './components/CaseStudy';
+import { Analytics } from '@vercel/analytics/react';
 import './styles/index.css';
 
 function App() {
@@ -55,7 +56,12 @@ function App() {
   }
 
   if (activeCaseStudy) {
-    return <CaseStudy onBack={handleBackFromCaseStudy} />;
+    return (
+      <>
+        <CaseStudy onBack={handleBackFromCaseStudy} />
+        <Analytics />
+      </>
+    );
   }
 
   return (
@@ -70,6 +76,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 }
